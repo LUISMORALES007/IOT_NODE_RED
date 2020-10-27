@@ -1,0 +1,19 @@
+[
+    {
+        "id": "fcdc1e54.c0378",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "7493e9ee.4b09e8",
+        "type": "comment",
+        "z": "fcdc1e54.c0378",
+        "name": "Node-Red y Git",
+        "info": "",
+        "x": 700,
+        "y": 40,
+        "wires": []
+    }
+]
