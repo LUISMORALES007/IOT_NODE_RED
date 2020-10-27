@@ -7,6 +7,16 @@
         "info": ""
     },
     {
+        "id": "c56e56de.3e6918",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "iot_2020",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
         "id": "7493e9ee.4b09e8",
         "type": "comment",
         "z": "fcdc1e54.c0378",
@@ -14,6 +24,94 @@
         "info": "",
         "x": 700,
         "y": 40,
+        "wires": []
+    },
+    {
+        "id": "c171d6cd.2d3f18",
+        "type": "mysql",
+        "z": "fcdc1e54.c0378",
+        "mydb": "c56e56de.3e6918",
+        "name": "registrosensor",
+        "x": 710,
+        "y": 240,
+        "wires": [
+            [
+                "44ae4371.ac35dc"
+            ]
+        ]
+    },
+    {
+        "id": "f9931894.9dcf28",
+        "type": "inject",
+        "z": "fcdc1e54.c0378",
+        "name": "Crear Tabla Sql",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "CREATE TABLE `registrosensor` (`id` INT NOT NULL AUTO_INCREMENT, `temperatura` FLOAT NOT NULL, `humedad` FLOAT NOT NULL, `fecha` TIMESTAMP NOT NULL, PRIMARY KEY (`id`)) ENGINE = InnoDB;",
+        "payload": "",
+        "payloadType": "date",
+        "x": 430,
+        "y": 180,
+        "wires": [
+            [
+                "c171d6cd.2d3f18"
+            ]
+        ]
+    },
+    {
+        "id": "8a87c20a.ff98c",
+        "type": "inject",
+        "z": "fcdc1e54.c0378",
+        "name": "Mostrar Tablas Sql",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "show tables",
+        "payload": "",
+        "payloadType": "date",
+        "x": 450,
+        "y": 300,
+        "wires": [
+            [
+                "c171d6cd.2d3f18"
+            ]
+        ]
+    },
+    {
+        "id": "44ae4371.ac35dc",
+        "type": "debug",
+        "z": "fcdc1e54.c0378",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 240,
         "wires": []
     }
 ]
