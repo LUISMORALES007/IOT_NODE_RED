@@ -17,6 +17,11 @@
         "charset": "UTF8"
     },
     {
+        "id": "afe34b8e.dcf928",
+        "type": "firebase admin",
+        "name": "iot-2020"
+    },
+    {
         "id": "7493e9ee.4b09e8",
         "type": "comment",
         "z": "fcdc1e54.c0378",
@@ -265,5 +270,99 @@
                 "c171d6cd.2d3f18"
             ]
         ]
+    },
+    {
+        "id": "6ae1c3bb.4b9c3c",
+        "type": "firebase out",
+        "z": "fcdc1e54.c0378",
+        "name": "Firebase",
+        "ref": "registrosensor",
+        "operation": "push",
+        "admin": "afe34b8e.dcf928",
+        "x": 620,
+        "y": 880,
+        "wires": [
+            [
+                "3a718624.5f301a"
+            ]
+        ]
+    },
+    {
+        "id": "8978385a.5a16d8",
+        "type": "inject",
+        "z": "fcdc1e54.c0378",
+        "name": "simularJson",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"temperatura\":92,\"humedad\":72}",
+        "payloadType": "json",
+        "x": 350,
+        "y": 900,
+        "wires": [
+            [
+                "6ae1c3bb.4b9c3c"
+            ]
+        ]
+    },
+    {
+        "id": "3a718624.5f301a",
+        "type": "debug",
+        "z": "fcdc1e54.c0378",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "aa8f1862.209088",
+        "type": "firebase in",
+        "z": "fcdc1e54.c0378",
+        "name": "Consultar BD Firebase",
+        "ref": "registrosensor",
+        "dataAtStart": true,
+        "admin": "afe34b8e.dcf928",
+        "x": 340,
+        "y": 1020,
+        "wires": [
+            [
+                "88aefd5a.3d80d"
+            ]
+        ]
+    },
+    {
+        "id": "88aefd5a.3d80d",
+        "type": "debug",
+        "z": "fcdc1e54.c0378",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 980,
+        "wires": []
     }
 ]
