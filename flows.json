@@ -32,11 +32,12 @@
         "z": "fcdc1e54.c0378",
         "mydb": "c56e56de.3e6918",
         "name": "registrosensor",
-        "x": 710,
+        "x": 720,
         "y": 240,
         "wires": [
             [
-                "44ae4371.ac35dc"
+                "bb1f94c0.d69b08",
+                "e007d426.44e328"
             ]
         ]
     },
@@ -90,8 +91,8 @@
         "topic": "describe registrosensor",
         "payload": "",
         "payloadType": "date",
-        "x": 450,
-        "y": 300,
+        "x": 430,
+        "y": 260,
         "wires": [
             [
                 "c171d6cd.2d3f18"
@@ -99,7 +100,54 @@
         ]
     },
     {
-        "id": "44ae4371.ac35dc",
+        "id": "901e6d50.2efeb",
+        "type": "function",
+        "z": "fcdc1e54.c0378",
+        "name": "insertSql",
+        "func": "\ntemperatura = msg.payload.temperatura;\nhumedad = msg.payload.humedad; \nmsg.topic = \"insert into registrosensor(id, temperatura , humedad, fecha) values (default,\" + temperatura + \",\" + humedad + \",\" + \"CURRENT_TIMESTAMP\"+ \")\"; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 400,
+        "y": 380,
+        "wires": [
+            [
+                "c171d6cd.2d3f18"
+            ]
+        ]
+    },
+    {
+        "id": "2ee36ad7.8a8846",
+        "type": "inject",
+        "z": "fcdc1e54.c0378",
+        "name": "simular Json",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"temperatura\":49,\"humedad\":73}",
+        "payloadType": "json",
+        "x": 170,
+        "y": 340,
+        "wires": [
+            [
+                "901e6d50.2efeb"
+            ]
+        ]
+    },
+    {
+        "id": "bb1f94c0.d69b08",
         "type": "debug",
         "z": "fcdc1e54.c0378",
         "name": "",
@@ -110,8 +158,112 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1020,
-        "y": 240,
+        "x": 970,
+        "y": 160,
         "wires": []
+    },
+    {
+        "id": "e007d426.44e328",
+        "type": "debug",
+        "z": "fcdc1e54.c0378",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "f46f1f77.1c976",
+        "type": "inject",
+        "z": "fcdc1e54.c0378",
+        "name": "Consulta Tabla",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Select * From registrosensor;",
+        "payload": "",
+        "payloadType": "date",
+        "x": 400,
+        "y": 480,
+        "wires": [
+            [
+                "c171d6cd.2d3f18"
+            ]
+        ]
+    },
+    {
+        "id": "c7bcd2cb.7162f",
+        "type": "inject",
+        "z": "fcdc1e54.c0378",
+        "name": "Modificar datos",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "update registrosensor set temperatura= 20 , humedad =20  Where id=1;",
+        "payload": "",
+        "payloadType": "date",
+        "x": 400,
+        "y": 560,
+        "wires": [
+            [
+                "c171d6cd.2d3f18"
+            ]
+        ]
+    },
+    {
+        "id": "4d36a556.9e756c",
+        "type": "inject",
+        "z": "fcdc1e54.c0378",
+        "name": "Eliminar Registros",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "delete from registrosensor where id>5",
+        "payload": "",
+        "payloadType": "date",
+        "x": 390,
+        "y": 640,
+        "wires": [
+            [
+                "c171d6cd.2d3f18"
+            ]
+        ]
     }
 ]
